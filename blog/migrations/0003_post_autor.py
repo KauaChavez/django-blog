@@ -19,3 +19,4 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL),
         ),
     ]
+ 

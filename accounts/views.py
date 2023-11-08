@@ -31,6 +31,20 @@ class AccountUpdateView(LoginRequiredMixin, UpdateView):
   success_url = reverse_lazy('posts_all') # rota para redirecionar após a edição
   success_message = 'Perfil atualizado com sucesso!'
 
+    def form_valid(self, form): # executa quando os dados estiverem válidos
+    form.instance.password = make_password(form.instance.password)
+    form.save()
+    messages.success(self.request, self.success_message)
+    return super(AccountCreateView, self).form_valid(form)
+
+class AccountUpdateView(LoginRequiredMixin, UpdateView):
+  model = User
+  template_name = 'accounts/user_form.html'
+  fields = ('first_name', 'email', 'imagem', ) # incluir os campos que deseja liberar a edição
+  success_url = reverse_lazy('posts_all') # rota para redirecionar após a edição
+  success_message = 'Perfil atualizado com sucesso!'
+
+
 def get_queryset(self): # método que altera o objeto recuperado pela view
   user_id = self.kwargs.get('pk') # recupera o argumento vindo na URL / rota
   user = self.request.user # obtém o objeto usuário da sessão
@@ -42,3 +56,4 @@ def get_queryset(self): # método que altera o objeto recuperado pela view
 def form_valid(self, form): # executa quando os dados estiverem válidos
   messages.success(self.request, self.success_message)
   return super(AccountUpdateView, self).form_valid(form)
+ 

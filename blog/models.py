@@ -1,7 +1,7 @@
 from django.db import models
 
-from django.contrib.auth import get_user_model
-User = get_user_model()
+from django.contrib.auth import get_user_model 
+User = get_user_model() 
 
 class Post(models.Model):
     body_text = models.TextField("Texto Principal")
@@ -19,9 +19,9 @@ class Post(models.Model):
         default=None,
         null=True,
     )
-    autor = models.ForeignKey(
-        User, 
-        editable=False,
-        on_delete=models.DO_NOTHING,
-        null=True
-    )
+    autor = models.ForeignKey( 
+        User,  
+        editable=False, 
+        on_delete=models.DO_NOTHING, 
+        null=True 
+    )  
